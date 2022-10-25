@@ -13,3 +13,11 @@ class EntitySerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('id', 'value', 'modified_by')
         model = Entity
+
+
+class EntityCreateSerializer(serializers.ModelSerializer):
+    value = serializers.IntegerField(required=True)
+
+    class Meta:
+        fields = ('value', )
+        model = Entity
