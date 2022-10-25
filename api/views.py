@@ -1,6 +1,6 @@
 from rest_framework import generics
 from .models import Entity, Property
-from .serializers import EntitySerializer, EntityCreateSerializer
+from .serializers import EntitySerializer
 
 
 class EntityList(generics.ListAPIView):
@@ -10,7 +10,7 @@ class EntityList(generics.ListAPIView):
 
 class EntityCreate(generics.CreateAPIView):
     queryset = Entity.objects.all()
-    serializer_class = EntityCreateSerializer
+    serializer_class = EntitySerializer
 
     def perform_create(self, serializer):
         serializer.save(modified_by=self.request.user)
