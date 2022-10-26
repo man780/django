@@ -18,3 +18,10 @@ class EntitySerializer(serializers.ModelSerializer):
 
     def get_data_value(self, obj):
         return obj.value
+
+    def to_internal_value(self, data):
+        result: dict = {}
+        request_data = data.get('data')
+        if request_data:
+            result['value'] = request_data.get('value')
+        return result
