@@ -9,9 +9,12 @@ class PropertySerializer(serializers.ModelSerializer):
 
 
 class EntitySerializer(serializers.ModelSerializer):
+    data_value = serializers.SerializerMethodField('get_data_value')
 
     class Meta:
-        fields = ('id', 'value', 'modified_by')
+        fields = ('id', 'value', 'data_value', 'modified_by')
         model = Entity
         read_only_fields = ('id', 'modified_by')
 
+    def get_data_value(self, obj):
+        return obj.value
