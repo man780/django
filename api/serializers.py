@@ -18,3 +18,12 @@ class EntitySerializer(serializers.ModelSerializer):
 
     def get_data_value(self, obj):
         return obj.value
+
+
+class EntityFullSerializer(serializers.ModelSerializer):
+    properties = PropertySerializer(read_only=True, many=True)
+
+    class Meta:
+        fields = ('value', 'properties')
+        model = Entity
+        read_only_fields = ('id', 'modified_by')

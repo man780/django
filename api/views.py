@@ -1,6 +1,6 @@
 from rest_framework import generics
-from .models import Entity, Property
-from .serializers import EntitySerializer
+from .models import Entity
+from .serializers import EntitySerializer, EntityFullSerializer
 
 
 class EntityList(generics.ListAPIView):
@@ -19,3 +19,8 @@ class EntityCreate(generics.CreateAPIView):
 class EntityDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Entity.objects.all()
     serializer_class = EntitySerializer
+
+
+class EntityFullList(generics.ListAPIView):
+    queryset = Entity.objects.all()
+    serializer_class = EntityFullSerializer
