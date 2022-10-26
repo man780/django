@@ -26,4 +26,18 @@ class EntityFullSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('value', 'properties')
         model = Entity
-        read_only_fields = ('id', 'modified_by')
+
+
+class EntityFull2Serializer(serializers.ModelSerializer):
+    property_list = serializers.SerializerMethodField()
+
+    def get_property_list(self, instance):
+        names = []
+        a = instance.properties.get_queryset()
+        for i in a:
+            names.append({i.key, i.value})
+        return names
+
+    class Meta:
+        fields = ('value', 'property_list')
+        model = Entity
